@@ -21,7 +21,7 @@ function Page1() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = await fetch("http://localhost:3000/submit", {
+            const response = await fetch("https://code-tuf-3.onrender.com/submit", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
