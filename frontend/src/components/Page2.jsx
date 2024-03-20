@@ -8,28 +8,42 @@ function Page2() {
         fetchEntries();
     }, []);
 
+    // const fetchEntries = async () => {
+    //     try {
+    //         const response = await fetch("https://code-tuf-3.onrender.com/snippets");
+    //         if (!response.ok) {
+    //             throw new Error('Failed to fetch entries');
+    //         }
+    //         const data = await response.json();
+    //         console.log("Fetched entries:", data); // Log fetched data
+    //         const entriesWithStdout = await Promise.all(data.map(async (entry) => {
+    //             try {
+    //                 const stdoutResponse = await fetch(`https://code-tuf-3.onrender.com/stdout/${entry.id}`);
+    //                 if (!stdoutResponse.ok) {
+    //                     throw new Error('Failed to fetch stdout');
+    //                 }
+    //                 const stdoutData = await stdoutResponse.json();
+    //                 return { ...entry, stdout: stdoutData.stdout };
+    //             } catch (error) {
+    //                 console.error("Error fetching stdout:", error);
+    //                 return { ...entry, stdout: "N/A" }; // Placeholder for stdout
+    //             }
+    //         }));
+    //         setEntries(entriesWithStdout);
+    //     } catch (error) {
+    //         console.error("Error fetching entries:", error);
+    //     }
+    // };
+
     const fetchEntries = async () => {
         try {
-            const response = await fetch("https://code-tuf-3.onrender.com/snippets");
+            const response = await fetch("http://localhost:3000/snippets");
             if (!response.ok) {
                 throw new Error('Failed to fetch entries');
             }
             const data = await response.json();
             console.log("Fetched entries:", data); // Log fetched data
-            const entriesWithStdout = await Promise.all(data.map(async (entry) => {
-                try {
-                    const stdoutResponse = await fetch(`https://code-tuf-3.onrender.com/stdout/${entry.id}`);
-                    if (!stdoutResponse.ok) {
-                        throw new Error('Failed to fetch stdout');
-                    }
-                    const stdoutData = await stdoutResponse.json();
-                    return { ...entry, stdout: stdoutData.stdout };
-                } catch (error) {
-                    console.error("Error fetching stdout:", error);
-                    return { ...entry, stdout: "N/A" }; // Placeholder for stdout
-                }
-            }));
-            setEntries(entriesWithStdout);
+            setEntries(data.map(entry => ({ ...entry, stdout: "N/A" })));
         } catch (error) {
             console.error("Error fetching entries:", error);
         }
