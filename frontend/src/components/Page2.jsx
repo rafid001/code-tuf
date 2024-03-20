@@ -18,7 +18,7 @@ function Page2() {
             console.log("Fetched entries:", data); // Log fetched data
             const entriesWithStdout = await Promise.all(data.map(async (entry) => {
                 try {
-                    const stdoutResponse = await fetch(`http://localhost:3000/stdout/${entry.id}`);
+                    const stdoutResponse = await fetch(`https://code-tuf-3.onrender.com/stdout/${entry.id}`);
                     if (!stdoutResponse.ok) {
                         throw new Error('Failed to fetch stdout');
                     }
