@@ -37,7 +37,7 @@ function Page2() {
 
     const fetchEntries = async () => {
         try {
-            const response = await fetch("http://localhost:3000/snippets");
+            const response = await fetch("https://code-tuf-3.onrender.com/snippets");
             if (!response.ok) {
                 throw new Error('Failed to fetch entries');
             }
